@@ -1,0 +1,409 @@
+var _pageUrlHead = _global_portalUrl+"/pt";
+
+var study_use_p = true;
+
+/// 산출물 미리보기
+function ocsPreviewOutput(outputCode, untseqNo, pgeNo) {
+    study.ocsPreviewOutput(outputCode, untseqNo, pgeNo);
+}
+
+/// 산출물 미리보기(+년도, + 정보)
+function ocsPreviewForOutputCheck(year, cntntsCode, untseqNo, pgeNo, interactionListString) {
+    study.ocsPreviewForOutputCheck(year, cntntsCode, untseqNo, pgeNo, interactionListString);
+}
+
+
+/// 콘텐츠 미리보기
+function ocsPreviewCntnts(cntntsCode, untseqNo, pgeNo) {
+    study.ocsPreviewContents(cntntsCode, untseqNo, pgeNo);
+}
+
+/// 모의학습하기 (미리보기와 동일해보여도 일단은 여기를 호출하자)
+function ocsStudyPreview(cntntsCode, untseqNo, pgeNo) {
+    study.ocsPreviewContents(cntntsCode, untseqNo, pgeNo);
+}
+
+/// 학습용 팝업 띄우기. (페이지번호를 null로 주면 이어보기가 됩니다. 차시번호 역시 마찬가지로 null이 가능합니다.)
+function ocsStudy(crseGrnoCode, cntntsCode, untseqNo, pgeNo) {
+    study.ocsStudyContents(crseGrnoCode, cntntsCode, untseqNo, pgeNo);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 이 이후는 불필요 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// :) ///
+////보지말아주세요//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _study_domain_fix = null;
+
+
+var _study = (function() {
+
+    // 724 + 64 ?? 724 + 153 ??
+    var vo = {
+        popup: {
+            width: 1024 + 16, height: 724,
+            fst_w: 1024 + 16, fst_h: (724 + 64)
+        },
+        pages: { prePage:"", eduPage:"", savePage:"" }
+    };
+
+    var _inst;
+
+    var protoss_type = {};
+
+    function domInit(abc_domain) {
+        if(abc_domain != null && abc_domain != "") {
+            _pageUrlHead = abc_domain;
+        }
+        vo.pages = {
+                prePage: _pageUrlHead + "/edu/player/ND_player0199d.do?q_virtual=1&",
+                eduPage: _pageUrlHead + "/edu/player/ND_player0199d.do?",
+                savePage: _pageUrlHead + "/edu/player/ND_player0174p.do?"
+        };
+    }
+
+    function init() {
+        domInit();
+
+        function _isMobile() {
+            var userAgent = navigator.userAgent;
+            return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
+                /\b(iP[ao]d)/.test(userAgent) ||
+                /Android/i.test(userAgent) ||
+                /Mobile/i.test(userAgent);
+        }
+        window.isMobile = _isMobile();
+
+        // pb
+        return {
+            initDomain: function(domain) {
+                console.error("deprecated");
+            },
+            updateDomain: function(domain) {  // 이걸 호출해주면 포탈 접근체크해서 업뎃됨.
+                console.error("deprecated");
+            },
+            updateDataBlock: function(dataBlock) {
+                if(study.data == null) { study.data = {}; }
+                var changed = false;
+                if(dataBlock.currentTime != null) { changed = changed || (study.data.currentTime == dataBlock.currentTime); study.data.currentTime = dataBlock.currentTime; }
+                if(dataBlock.bookmarkList != null) { changed = changed || (study.data.bookmarkList == dataBlock.bookmarkList); study.data.bookmarkList   = dataBlock.bookmarkList;   }
+                if(dataBlock.showCaption != null) { changed = changed || (study.data.showCaption == dataBlock.showCaption); study.data.showCaption = dataBlock.showCaption; }
+                if(study.dataChanged === null) {study.dataChanged = false; }
+                study.dataChanged |= changed;
+            },
+
+
+            savePageDataBlock: function(block, func) {
+                var callback = function() { if (func) func(); };
+                if(study.lastBlock != null) {
+                    try {
+                        var isEqual =
+                            study.lastBlock.currentTime == block.currentTime
+                            && study.lastBlock.bookmarkList == block.bookmarkList
+                            && study.lastBlock.showCaption == block.showCaption;
+                        if(isEqual) {
+                            console.info("savePageDataBlock: ignored duplicated request.");
+                            console.info("study.lastBlock.currentTime("+study.lastBlock.currentTime+") == block.currentTime(" + block.currentTime + ")");
+                            callback();
+                            return;
+                        }
+                    } catch(e) { };
+                }
+                study.lastBlock = {
+                    currentTime: block.currentTime,
+                    bookmarkList: block.bookmarkList,
+                    showCaption: block.showCaption
+                };
+
+                $.ajax({
+                    url : vo.pages.savePage,
+                    type : "POST",
+                    async: true,
+                    data : block,
+                    dataType : "json",
+                    success : function(response) {
+                        console.info(response.message);
+                        callback(true, response);
+                    },
+                    error : function(response) {
+                        console.error(response);
+                        console.error(response.responseText);
+                        callback(false, response);
+                    }
+                });
+            },
+
+            ocsPreviewOutput: function (outputCode, untseqNo, pgeNo) {
+                var title = "";
+                var untseqNo = Math.max(1, parseInt((untseqNo == null) ? 1 : untseqNo));
+                var pgeNo = Math.max(1, parseInt((pgeNo == null) ? 1 : pgeNo));
+                var param = "kohi_cyber_study=education&kohi_window=learning&popup_kohi=url&abcd=efg&hijklmn=op&qrst=uvwx&y=z&";
+                param += "q_outputCode=" + outputCode + "&q_untseqNo=" + untseqNo + "&q_pgeNo=" + pgeNo;
+                study.ocsPreviewTP(title, param);
+            },
+            ocsPreviewForOutputCheck: function (year, outputCode, untseqNo, pgeNo, interactionListString) {
+                var title = "";
+                var untseqNo = Math.max(1, parseInt((untseqNo == null) ? 1 : untseqNo));
+                var pgeNo = Math.max(1, parseInt((pgeNo == null) ? 1 : pgeNo));
+                var param = "kohi_cyber_study=education&kohi_window=learning&popup_kohi=url&abcd=efg&hijklmn=op&qrst=uvwx&y=z&";
+                param += "&q_outputCode=" + outputCode + "&q_untseqNo=" + untseqNo + "&q_pgeNo=" + pgeNo;
+                param += "&q_outputYear="+ year + "&q_actList=" + interactionListString;
+                study.ocsPreviewTP(title, param);
+            },
+
+
+
+            /// 콘텐츠 미리보기
+            ocsPreviewContents: function (cntntsCode, untseqNo, pgeNo) {
+                var title = "";
+                var untseqNo = Math.max(1, parseInt((untseqNo == null) ? 1 : untseqNo));
+                var pgeNo = Math.max(1, parseInt((pgeNo == null) ? 1 : pgeNo));
+                var param = "kohi_cyber_study=education&kohi_window=learning&popup_kohi=url&abcd=efg&hijklmn=op&qrst=uvwx&y=z&";
+                param += "&q_cntntsCode=" + cntntsCode + "&q_untseqNo=" + untseqNo + "&q_pgeNo=" + pgeNo;
+                study.ocsPreviewTP(title, param);
+            },
+
+            ocsStudyContents: function (crseGrnoCode, cntntsCode, untseqNo, pgeNo) {
+                var title = "";
+                var param = "kohi_cyber_study=education&kohi_window=learning&popup_kohi=url&abcd=efg&hijklmn=op&qrst=uvwx&y=z&";
+                param += "&q_crseGrnoCode=" + crseGrnoCode;
+                if(true) { param += "&q_cntntsCode=" + cntntsCode; }
+                if(untseqNo != null ) { param += "&q_untseqNo=" + Math.max(1, parseInt((untseqNo == null) ? 1 : untseqNo)); }
+                if(pgeNo != null) { param += "&q_pgeNo=" + Math.max(1, parseInt((pgeNo == null) ? 1 : pgeNo)); }
+                study.ocsStudyTP(title, param);
+            },
+
+            // 미리보기 띄우기 (타이틀, 파람)
+            ocsPreviewTP: function (title, param) {
+                study.popupCenterRes(vo.pages.prePage, param, title, "scrollbars=0,resizable=0,toolbar=0,menubar=0,location=0,directories=0,status=0");
+            },
+
+            // 학습창 띄우기 (타이틀, 파람)
+            ocsStudyTP: function (title, param) {
+                if (!study_use_p) {
+                    alert("intra에서는 제공하지 않습니다.");
+                    return;
+                }
+                study.popupCenterRes(vo.pages.eduPage, param, title, "scrollbars=0,resizable=0,toolbar=0,menubar=0,location=0,directories=0,status=0");
+            },
+
+            popupCenterRes: function (url, param, title, more) {
+                // if(_study_domain_fix != null) {
+                    study.popupCenter(vo.pages.eduPage, param, title, "scrollbars=0,resizable=0,toolbar=0,menubar=0,location=0,directories=0,status=0");
+                    return;
+                // }
+                
+                if(_pageUrlHead == "http://devlms.kohi.or.kr/lm") {
+                	// fix for 10
+                	domInit("http://devportal.kohi.or.kr:10080/pt");
+                    study.popupCenter(vo.pages.eduPage, param, title, "scrollbars=0,resizable=0,toolbar=0,menubar=0,location=0,directories=0,status=0");
+                    return;
+                }
+
+                //
+                // var url = _pageUrlHead + "/edu/player/heartbeat.do";
+                // $.ajax({
+                //     url: url,
+                //     success: function(data, textStatus, response) {
+                //         var txt = data;
+                //         var url = response.getResponseHeader('Player-Domain');
+                //
+                //         _study_domain_fix = txt;
+                //         console.info("beat " + txt +"[ "+url+" ] = "+_pageUrlHead);
+                //         if(url == null || url == "") {
+                //             alert("서버가 응답하지 않습니다.\n잠시 후 다시 시도해주세요.");
+                //             return;
+                //         }
+                //         domInit(url);
+                //         study.popupCenter(vo.pages.eduPage, param, title, "scrollbars=0,resizable=0,toolbar=0,menubar=0,location=0,directories=0,status=0");
+                //     },
+                //     error: function(response, textStatus, errorThrown) {
+                //         var txt = response;
+                //         console.info("beat failure " + txt +"("+textStatus+") "+errorThrown +" = "+_pageUrlHead);
+                //         alert("서버가 응답하지 않습니다.\n잠시 후 다시 시도해주세요.");
+                //     }
+                // });
+            },
+
+                // 화면 중앙에 창 띄우기
+            popupCenter: function (url, param, title, more) {
+                console.info("popupCenter = "+ url + param);
+                var width = screen.width;
+                var height = screen.height;
+                var w = vo.popup.fst_w;
+                var h = vo.popup.fst_h;
+                var systemZoom = width / window.screen.availWidth;
+                var left = (width - w) / 2 / systemZoom;
+                var top = (height - vo.popup.height) * 0.25 / systemZoom;
+                var arg = 'width=' + (w / systemZoom) + ', height=' + (h / systemZoom) + ', top=' + top + ', left=' + left + ', ' + more;
+
+                var newWindow = window.open(url + param, "kohiEduPopup", arg);
+
+                var eduStudyInfo = {};
+                eduStudyInfo.in_study = true;
+                eduStudyInfo.in_title = title;
+                eduStudyInfo.in_parent = this.window;
+                eduStudyInfo.in_pop = newWindow;
+                study.eduStudyInfo = eduStudyInfo;
+                newWindow.focus();
+            },
+            eduStudyInfo: {},
+            eduPopupConnector: function(win, data, more) {
+                function prettyText(obj) {
+                    var result = "" + obj;
+                    try { var json = JSON.parse(obj); if(json==='object') { return JSON.stringify(obj); } }
+                    catch(e) {
+                        if(typeof obj === "function") return "[callback]:" + (result.substr(0, 128));
+                        if(typeof obj === "object") return JSON.stringify([obj]);
+                    }
+                    return result;
+                }
+
+                var dataString = prettyText(data);
+                var moreString = prettyText(more);
+                console.info("eduPopupConnector: " + dataString + ", "+ moreString);
+
+                if(data == "load") {
+                    if(more == true) {
+                        var logoutButtons = $("a[href$='UserLogoutAction.do']");
+                        logoutButtons.unbind('click');
+                        logoutButtons.bind('click', function (e) {
+                            window.focus();
+                            var result = confirm('현재 학습중인 과정이 있습니다.\n그래도 로그아웃하시겠습니까?');
+                            if(!result) {
+                                win.focus();
+                            }
+                            return result;
+                        });
+                    }
+                    return;
+                }
+                if(data == "save") {
+                    var mixedBlock = more;
+                    study.savePageDataBlock(mixedBlock, null);
+
+                }
+                if(data == "unload") {
+                    var logoutButtons = $("a[href$='UserLogoutAction.do']");
+                    logoutButtons.unbind('click');
+                    return;
+                }
+                //console.info(study.eduStudyInfo);
+            },
+            resizePopup: function() {
+                if(_isMobile()) { return; }
+                var isFullscreenMode = Math.abs(screen.width - window.innerWidth) < 10;
+                if(isFullscreenMode) {
+                    return;
+                }
+                var ww = vo.popup.width + frameWidth;
+                var hh = vo.popup.height + frameHeight;
+                console.log("win_in:("+ window.innerWidth +", " + window.innerHeight + "), win_out:("+ window.outerWidth + ", " + window.outerHeight +")");
+                window.top.resizeTo(ww, hh);
+            },
+            getVo: function() { return vo; },
+            isMobile: function() { return _isMobile(); }
+        };
+    };
+
+    return {
+        getInstance: function () {
+            if (!_inst) {
+                _inst = init();
+            }
+            return _inst;
+        }
+    };
+})();
+var study = _study.getInstance();
+
+
+function getParameterByName(name, url) {
+    var resules = (new RegExp("[?&]" + name.replace(/[\[\]]/g, "\\$&") + "(=([^&#]*)|&|#|$)")).exec(url ? url : window.location.href);
+    return results ? (results[2] ? decodeURIComponent(results[2].replace(/\+/g, " "))  : '') : null;
+}
+
+
+if (!String.prototype.padStart) {
+    String.prototype.padStart = function padStart(targetLength, padString) {
+        if (this.length >= targetLength) {
+            return String(this);
+        } else {
+            if(padString == null || padString == ' ') {
+                padString = ' ';
+            } else if(padString.length > 1) {
+                padString = padString.substring(0,1);
+            }
+            targetLength = targetLength - this.length;
+            var prefix = "";
+            for(var i=0; i<targetLength; i++) {
+                prefix += padString;
+            }
+            return prefix + String(this);
+        }
+    };
+}
