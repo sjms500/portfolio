@@ -108,8 +108,8 @@ body::-webkit-scrollbar-track{background-color: #e4eee9;}
 #header-section>.header-section-container h1.main-ment2{position: absolute;top: 50%;left: 56%;z-index: 5;} */
 #header-section>.header-section-container>div{width: 58%;height: 53%;margin: 100px auto;position: absolute;top: 16%;left: 17%;z-index: 4;}
 #header-section>.header-section-container>div>.main-show{position: relative;z-index: 0;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;height: 100%;background-color: #fff;overflow: hidden;}
-#header-section>.header-section-container>div>.main-show>.main-show-bg{position: absolute;z-index: -1;top: 0;left: 2%;width: 100%;height: 110%;background-image: url("../img/main-cookie.jpg");background-size: 80%;background-position: center center;-webkit-animation: move 10s infinite linear;animation: move 10s infinite linear;will-change: transform;}
-.mask-container {position: relative;display: block;width: 110%;}
+#header-section>.header-section-container>div>.main-show>.main-show-bg{position: absolute;z-index: -1;top: 0;left: 2%;width: 100%;height: 110%;background-image: url("../img/main-cookie.jpg");background-size: 80%;background-position: center center;-webkit-animation: move 10s infinite linear;animation: move 10s infinite linear;will-change: transform;overflow: hidden;}
+.mask-container {position: relative;display: block;width: 110%;overflow: hidden;}
 .mask-container::before, .mask-container::after {content: '';position: absolute;width: 5000%;height: 301%;left: 0;background-color: #fff;}
 .mask-container::before {top: -310%;}
 .mask-container::after {bottom: -295%;}
