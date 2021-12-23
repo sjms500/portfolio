@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYNAMIC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="./favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <div class="phone">
+        <div class="phone-camera"><img src="./img/iphone13_mobile_camera-small.png" alt="카메라렌즈"></div>
+        <div class="content">
+            <iframe src="mobile/index.html" frameborder="0"></iframe>
+        </div>
+    </div>
+    <div class="left">
+        <h1><img src="./img/mobile-logo-700x110.png" alt="logo"></h1>
+        <div class="text">
+            <h2>다이나믹 프로모션 모바일 어플</h2>
+            <h3>기획 100%, 디자인 100%<span>/ 2018년 대학 2학년</span><br>퍼블리싱 100%<span>/ 2021년 12월 현재</span></h3>
+            <h3>아웃도어 브랜드와 캠핑의 콜라보 프로모션 어플</h3>
+            <h2 class="title">기&nbsp;&nbsp;·&nbsp;·<br>획</h2>
+            <h3>최근 글램핑의 등장으로 사람들의 여가 활동에 글램핑을 포함한 여러 캠핑의 형태가 각광받고 있는 상황이다. 이에 캠핑 어플을 기획 중 타 어플과 차별점을 두어 아웃도어와 결합한 아이덴티티로 제작하였다.
+            <span>// 2018년, 퍼블리싱 2021년</span></h3>
+        </div>
+    </div>
+    <div class="right">
+        <h1><img src="./img/mobile-icon.png" alt="어플아이콘"></h1>
+    </div>
+    <script src="js/modernizr-custom.js"></script>
+    <script>
+        if(Modernizr.touchevents){
+            location.href='./mobile/index.html';
+        }else{
+            //not-supported
+        }
+    </script>
+</body>
+</html>

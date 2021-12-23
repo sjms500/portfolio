@@ -271,7 +271,6 @@ $('.pj04-responsive').hover(function(){
 //   tg.css("left",start).stop().animate({left:end},2000);
 // }
 
-
 //CONTACT 롤링효과 시작
 $('.contact-roll > li').eq(0).siblings().hide();
 var slide_in=0;
@@ -298,4 +297,24 @@ $(window).scroll(function () {
     $('.up').show();
   }
 
+});
+
+//all-popup
+$('.pop1').click(function(){
+  $('#popup1').fadeIn();
+});
+$('.pop2').click(function(){
+  $('#popup2').fadeIn();
+});
+$('.btn').click(function(){
+  $('.popup').fadeOut();
+});
+$('.popup img').click(function(){
+  $('.popup').fadeOut();
+});
+$('.btn').click(function(){
+  $('#update').fadeOut();
+});
+$('#update').click(function(){
+  $('#update').fadeOut();
 });
