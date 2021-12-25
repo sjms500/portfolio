@@ -180,7 +180,7 @@ svg {width: 100%;height: 100%;}
 .license{width: 100%;height: 200px;}
 .license ul{width: 50%;height: 150px;float: left;margin-top: 15px;}
 .license ul li{margin: 16px 20px;width: 100%;letter-spacing: 0;}
-.license ul .ready{color: #000;border-bottom: 5px solid peachpuff;width: 157px;height: 19px;}
+.license ul .ready{color: #000;border-bottom: 5px solid peachpuff;width: 110px;height: 19px;}
 /* content03 */
 .content03{width: 33%;height: inherit;}
 .content03 h3{font-size: 23px;font-weight: bold;margin-bottom: 22px;}
