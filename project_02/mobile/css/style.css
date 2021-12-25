@@ -38,11 +38,10 @@ h1, h2, h3, h4, a, span{font-family: 'Pretendard-Regular';}
 
 /* nav */
 #nav{position: fixed;z-index: 999;width: 392px;height: 70px;background-color: #fff;top: 780px;box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px;}
-#nav>.tab-content>ul{width: 340px;height: 70px;display: flex;justify-content: space-between;margin: 0 auto;}
-#nav>.tab-content>ul>li{width: 80px;height: 50px;text-align: center;margin-top: 10px;}
-#nav>.tab-content>ul>li>a{font-size: 12px;display: block;width: 80px;}
-#nav>.tab-content>ul>li>a>img{display: block;width: 30px;height: 30px;margin: 0 auto 4px;}
-.tab{display: none;}
+#nav>.nav-wrap>ul{width: 340px;height: 70px;display: flex;justify-content: space-between;margin: 0 auto;}
+#nav>.nav-wrap>ul>li{width: 80px;height: 50px;text-align: center;margin-top: 10px;}
+#nav>.nav-wrap>ul>li>a{font-size: 12px;display: block;width: 80px;}
+#nav>.nav-wrap>ul>li>a>img{display: block;width: 30px;height: 30px;margin: 0 auto 4px;}
 /* main */
 main{position: relative;top: 90px;}
 #slide{width: 392px;height: 200px;}
