@@ -1,27 +1,9 @@
-//splash
-var tab=$(".tab ul li");
-var tabContent=$(".tab-content>div");
+var splash=$('.splash-main')
+  splash.hover(function(){
+    $(this).fadeOut(1500);
+  });
 
-tab.click(function(){
-    var tg=$(this);
-    var i=tg.index();
-
-    tabContent.css('display','none');
-    tabContent.eq(i).css('display','block');
-});
-
-//swiper/header-section
-// var swiper = new Swiper(".mySwiper", {
-  
-//     slidesPerView: 1,
-//     spaceBetween: 0,
-//     mousewheel: true,
-//     pagination: {
-//       el: ".swiper-pagination",
-//       clickable: true,
-//     },
-//   });
-  //slide
+//slide
 // var slide=$('#slide>ul>li');
 // var current=0;
 
@@ -32,7 +14,7 @@ tab.click(function(){
 //     if(current==slide.size()){current=0;}
 //     var next=slide.eq(current);
 //     move(next, '-100%', 0);
-// },2000);
+// },3000);
 // function move(tg, start, end){
-//     tg.css('left', start).stop().animate({left:end},500);
+//     tg.css('right', start).stop().animate({right:end},1000);
 // }

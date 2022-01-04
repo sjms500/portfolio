@@ -1,0 +1,57 @@
+#area{width: 392px;height: 250px;}
+
+
+.search-wrap{width: 392px;height: auto;background-color: #fff;position: relative;}
+.search-wrap>h3{width: 392px;height: 50px;font-size: 20px;text-align: center;background-color: #fff;padding-top: 12px;font-family: 'Pretendard-Regular';font-weight: bold;}
+.tab{width: 392px;height: 40px;background-color: #fff;border-bottom: 1px solid #ccc;}
+.tab>ul{width: 280px;height: 60px;margin: 0 auto;}
+.tab>ul>li{width: 100px;height: 40px;float: left;font-size: 16px;line-height: 40px;text-align: center;border-bottom: 2px solid #333;padding-bottom: 3px;margin-left: 80px;font-weight: 500;cursor: pointer;}
+.tab>ul>li:first-child{margin-left: 0px;}
+.tab>ul>li.active{border-bottom: 4px solid red;color: red;font-weight: bold;}
+.tab-content{width: 392px;height: 70px;position: absolute;background-color: #fff;z-index: 10;}
+.country{width: 384px;height: 100px;position: relative;top: 0px;left: 6px;}
+.country>ul{width: 360px;margin: 0 auto;}
+.country>ul>li{width: 60px;height: 30px;background-color: #fff;border: 1px solid #ccc;margin: 0 auto;float: left;text-align: center;border-left: 0px;border-top: 0px;}
+.country>ul>li:first-child{border-left: 1px solid #ccc;}
+.country>ul>li:nth-child(7){border-left: 1px solid #ccc;}
+.country>ul>li:first-child>a{color: red;font-weight: bold;}
+.country>ul>li:hover>a{color: red;font-weight: bold;}
+.country>ul>li>a{font-size: 13px;display: block;padding-top: 5px;color: #666;}
+.keywords{width: 380px;height: 180px;margin: 0 auto;position: absolute;top: 4px;left: 0;display: none;}
+.keywords>ul{width: 340px;height: 180px;margin: 0 auto;}
+.keywords>ul>li{width: auto;height: auto;float: left;margin-right: 2px;border: 1px solid red;border-radius: 50px;margin-top: 5px;margin-right: 10px;text-align: center;}
+.keywords>ul>li:hover{border: 1px dashed red;}
+.keywords>ul>li:hover>a{color: red;}
+.keywords>ul>li:first-child{margin-left: 15px;}
+.keywords>ul>li:nth-child(6){margin-right: 0;}
+.keywords>ul>li:nth-child(7){margin-left: 35px;}
+.keywords>ul>li>a{padding: 5px;text-align: center;font-size: 13px;color: #666;}
+.search{width: 392px;height: 40px;background-color: #fff;position: absolute;top: 160px;box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px;}
+.search>ul{width: 365px;margin: 0 auto;display: flex;justify-content: space-between;}
+.search>ul>li{width: 90px;font-size: 15px;text-align: center;}
+.search>ul>li:first-child{padding: 3px 0 0;color: #333;font-weight: bold;width: 80px;}
+.search>ul>li:last-child{background-color: red;padding: 3px 0;color: #fff;}
+
+/* section3 */
+#section3{background-color: red;width: 392px;height: 1480px;position: relative;top: 110px;}
+.sec3-top{width: 365px;height: 50px;justify-content: space-between;display: flex;padding-top: 15px;margin: 0 auto;}
+.sec3-top>h4{font-size: 15px;color: #fff;font-weight: bold;letter-spacing: 1px;}
+.sec3-top>select{width: 120px;height: 25px;background-color: red;border: 1px solid #fff;text-align: center;color: #fff;}
+.sec3-top>select>option{background-color: #fff;color: #333;}
+.camp{width: 392px;margin-top: 5px;}
+.camp>ul>li{width: 392px;height: 250px;background-color: #fff;border-radius: 30px;margin-bottom: 25px;}
+.camp>ul>li:first-child{width: 392px;height: 250px;background-color: #fff;border-radius: 0 0 30px 30px;}
+.camp>ul>li>a{display: block;width: 360px;margin: 0 auto;}
+.camp>ul>li>a>img{width: 360px;height: 160px;display: block;margin: 0 auto;padding-top: 20px;}
+.camp>ul>li>a>ul{display: flex;justify-content: space-between;width: 360px;margin-top: 27px;}
+.camp>ul>li>a>ul>li{width: 150px;}
+.camp>ul>li>a>ul>li:last-child{text-align: right;}
+.camp>ul>li>a>ul>li>p{font-size: 17px;font-weight: bold;color: #333;line-height: 20px;}
+.camp>ul>li>a>ul>li>p>span{font-size: 13px;font-weight: normal;color: #333;}
+.camp>ul>li>a>ul>li>ul{width: 100px;float: right;}
+.camp>ul>li>a>ul>li>ul>li{font-size: 15px;text-align: right;width: 50px;line-height: 22px;}
+.camp>ul>li>a>ul>li>ul>li:first-child{padding-left: 50px;width: 100px;text-align: right;}
+.camp>ul>li>a>ul>li>ul>li:nth-child(2){float: left;}
+.camp>ul>li>a>ul>li>ul>li:nth-child(3){float: left;}
+.camp>ul>li>a>ul>li>ul>li>img{width: 14px;height: 14px;background-color: red;display: block;float: left;margin-top: 4px;}
+.camp>ul>li>a>ul>li>ul>li>span{float: left;width: 20px;display: block;padding-left: 5px;}
